@@ -73,7 +73,8 @@
 					</execution>
 				</executions>
 				<configuration>
-					<destFile>${sonar.jacoco.reportPath}</destFile>
+					<destFile>${sonar.jacoco.reportPath}</destFile>					
+					<append>true</append>
 				</configuration>
 			</plugin>
 		</plugins>
