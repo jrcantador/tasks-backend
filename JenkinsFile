@@ -28,8 +28,10 @@ pipeline {
         }
         stage ('API Test') {     
             steps {  
-                git credentialsId: 'Git', url: 'https://github.com/jrcantador/tasks-functional-tests.git'
-                sh 'mvn test'
+                dir('api-test') {
+                    git credentialsId: 'Git', url: 'https://github.com/jrcantador/tasks-functional-tests.git'
+                    sh 'mvn test'
+                }
             }
         }
     }
