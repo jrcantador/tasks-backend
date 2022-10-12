@@ -7,6 +7,12 @@ pipeline {
             }
         }
     }
+    stage ('unit tests') {
+            steps {
+                sh 'mvn test'
+            }
+        }
+    }
     tools {
        maven "Maveb"       
     }
