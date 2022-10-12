@@ -21,12 +21,9 @@ pipeline {
                 }
             }
         }
-        stage ('Quality Gate') {           
-            steps {
-                sleep(5)
-                timeout(time: 1, unit: 'MINUTES'){
-                    waitForQualityGate abortPipeline: true 
-                }
+        stage ('tomcat') {     
+            steps {  
+                deploy adapters: [tomcat8(credentialsId: 'tomcat', path: '', url: 'http://tomcat:8000/')], contextPath: 'tasks-backend', war: 'target/tasks-backend.war'             
             }
         }
     }
