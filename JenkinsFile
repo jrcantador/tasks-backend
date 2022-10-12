@@ -11,6 +11,16 @@ pipeline {
                 sh 'mvn test'
             }
         }
+        stage ('Sonar Analysis') {
+            environment {
+                scannerHome = tool 'SONAR_SCANNER'
+            }
+            steps {
+                withSonarQubeEnv('SONAR_LOCAL') {
+                    sh "${scannerHome}/bin/sonar-scanner -e -Dsonar.projectKey=DeployBack -Dsonar.host.url=http://sonar:9000 -Dsonar.login=e534d812550c7be73bfc0ed0a238f7bd80e9af15 -Dsonar.java.binaries=target -Dsonar.coverage.exclusions=**/mvn/**,**/src/test/**,**/model/**,**Application.java"
+                }
+            }
+        }
     }
     tools {
        maven "Maveb"       
