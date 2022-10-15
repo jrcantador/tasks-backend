@@ -34,6 +34,15 @@ pipeline {
                 }
             }
         }
+        stage ('deploy font') {     
+            steps {  
+                dir('frontend') {
+                    git credentialsId: 'Git', url: 'https://github.com/jrcantador/tasks-frontend.git'
+                    sh 'mvn clean package'
+                    deploy adapters: [tomcat8(credentialsId: 'tomcat', path: '', url: 'http://tomcat:8000/')], contextPath: 'tasks', war: 'target/tasks.war'             
+                }
+            }
+        }
     }
     tools {
        maven "Maveb"       
